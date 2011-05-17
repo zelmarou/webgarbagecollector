@@ -1,0 +1,114 @@
+
+<!-- javascript setup. pretty simple stuff -->
+
+<%#*<div id="listing_videos" >%>
+<%#*<table>%>
+<%#*<tr>%>
+<%#*<th>Param title</th>%>
+<%#*<th>Param doc</th>%>
+<%#*<th>Param size</th>%>
+<%#*<th>Param path</th>%>
+<%#*<th>Param hits</th>%>
+<%#*<th>Param mark</th>%>
+<%#*<th>Param desc</th>%>
+<%#*<th>Param type</th>%>
+<%#*</tr>%>
+
+<%# @videos.each do |video| %>
+<%#*<tr>%>
+<%#*<td><%=h video.param_title %>
+<%#*</td>%>
+<%#*<td><%=h video.param_doc %>
+<%#*</td>%>
+<%#*<td><%=h video.param_size %>
+<%#*</td>%>
+<%#*<td><%=h video.param_path %>
+<%#*</td>%>
+<%#*<td><%=h video.param_hits %>
+<%#*</td>%>
+<%#*<td><%=h video.param_mark %>
+<%#*</td>%>
+<%#*<td><%=h video.param_desc %>
+<%#*</td>%>
+<%#*<td><%=h video.param_type %>
+<%#*</td>%>
+<%#*<td><%=h link_to image_tag(video.param_thumb), video_path(video)%>
+<%#*</td>%>
+<%#*<td><%= link_to 'Show', video %>
+<%#*</td>%>
+<%#*<td><%= link_to 'Edit', edit_video_path(video) %>
+<%#*</td>%>
+<%#*<td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %>
+<%#*</td>%>
+<%#*</tr>%>
+<%#*<tr>%>
+<%#*<td><%=h link_to image_tag(video.param_thumb), video_path(video)%>
+<%#*</td>%>
+<%#*<td><%=h video.param_desc %>
+<%#*</td>%>
+<%#*</tr>%>
+
+<%# end %>
+
+<%#*</table>%>
+<br/>
+<%#*<div id="playlist" style="text-align: center;width: 800px;height: 350px;margin: 0 auto;padding: 0 0 ;overflow:scroll;overflow-y:hidden;overflow-x:scroll;padding: 5px 5px;">%>
+<%#*<h2> [SUGGESTIONS]</h2>%>
+<%#*<!-- root element of the playlist -->%>
+<%#*<table style="margin-left: auto;margin-right: auto;text-align: left;">%>
+<%#*<tr>%>
+<%# @videos.each do |video| %>
+<%#*<td>%>
+<%#*<!-- single entry -->%>
+<%#*<div id="siglentry" style="float: left; margin: 0 0 10px 10px">%>
+<%#*<a href="<%=video.movieclip.url%>
+<%#= video.param_title%><br/>
+<%#=image_tag video.param_thumb %>
+<%#*<strong>Here is an item in the playlist</strong><br /><br />And a subtitle.%>
+<%#*<em>0.22</em>%>
+<%#*</a>%>
+<%#*</div>%>
+
+<%#*</td>%>
+<%#*<!-- ... add more entries here ... -->%>
+<%# end %>
+<%#*</tr>%>
+<%#*</table>%>
+<%#*</div>%>
+
+<div id="playlist" style="font-size: 15px;float:right; text-align: left;border:1px solid black;width:400px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 0px 10px;">
+  <ul style="list-style-type: none;">
+    <%@i=0; @videos.each do |video|
+    @i=@i+1%>
+  <%#*<p>%>
+
+    <li style="padding-bottom: 20px;">
+        <div id="video_<%=video.id%>_index_<%=video.param_title%>" class="<%=video.param_title%>">
+          <a href="<%=video.movieclip.url%>">
+
+            <div style="">
+            <%=image_tag( video.param_thumb,{:class => "video_thumb"} )%> 
+
+              <div style="vertical-align: text-top;float: right;">
+                <h3> <%=video.param_title%>
+                </h3>
+                <div style="text-align: center">
+                  <%= video.param_desc %>
+                </div>
+              </div>
+            </div>
+
+          </a>
+        </div>
+      </li>
+
+  <%#*</p>%>
+    <% end %>
+  </ul>
+</div>
+
+
+<%#*</div>%>
+
+
+

@@ -1,0 +1,99 @@
+<%#*<p>%>
+  <%#*<b>Param title:</b>%>
+  <%#=h @video.param_title %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param doc:</b>%>
+  <%#=h @video.param_doc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param size:</b>%>
+  <%#=h @video.param_size %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param path:</b>%>
+  <%#=h @video.param_path %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param hits:</b>%>
+  <%#=h @video.param_hits %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param mark:</b>%>
+  <%#=h @video.param_mark %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param desc:</b>%>
+  <%#=h @video.param_desc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param type:</b>%>
+  <%#=h @video.param_type %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param title:</b>%>
+  <%#=h @video.param_title %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param doc:</b>%>
+  <%#=h @video.param_doc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param size:</b>%>
+  <%#=h @video.param_size %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param path:</b>%>
+  <%#=h @video.param_path %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param hits:</b>%>
+  <%#=h @video.param_hits %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param mark:</b>%>
+  <%#=h @video.param_mark %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param desc:</b>%>
+  <%#=h @video.param_desc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param type:</b>%>
+  <%#=h @video.param_type %>
+<%#*</p>%>
+
+<div id="page">
+<!-- this A tag is where your Flowplayer will be placed. it can be anywhere -->
+		<a
+                  href="<%=video.movieclip.url%>"
+			 style="display:block;width:520px;height:330px"
+			 id="player">
+                </a>
+
+
+<!-- this will install flowplayer inside previous A- tag. -->
+
+		<script type="text/javascript">
+			flowplayer("player", "/flash/flowplayer-3.2.7.swf");
+		</script>
+ <img alt="Gr" src="/movieclips/1/original/rails.png"></img>
+</div>
+
+<%= link_to 'Edit', edit_video_path(video) %> |
+<%= link_to 'Back', videos_path %>

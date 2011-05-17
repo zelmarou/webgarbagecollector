@@ -1,0 +1,112 @@
+<div id="wiki_video" style="border:5px solid green;margin: 0 auto; padding: 0 0;margin-top: 550px;">
+<div>
+<h2>Video identity</h2>
+<%@video = Video.find(1)%>
+  <p><h3>Date of creation:</h3>
+  <%=h      @video.param_wiki_date %>
+</p>
+<p><h3>Author:</h3>
+  <%=h      @video.param_wiki_author %>
+</p>
+  <div style="float: right">
+<%= button_to "Don't agree", { },{:method => :get, :style => "font-size:20px"} %>
+  </div>
+  <div style="float: right">
+<%= button_to "Agree", {}, {:method => :get, :style => "font-size:20px"} %>
+  </div>
+<p><h3>Country from:</h3>
+  <%=h      @video.param_wiki_country %>
+</p>
+<p><h3>Clip history:</h3>
+  <%=h      @video.param_wiki_story %>
+</p>
+<p><h3>Web relative links:</h3>
+  <%=h      @video.param_wiki_links %>
+</p>
+</div>
+
+<%= button_to "Edit", {:action => "show_wiki", :id => @video }, {:method => :put, :style => "font-size:30px"} %>
+</div>
+
+
+<%#*<p>%>
+  <%#*<b>Param title:</b>%>
+  <%#=h @video.param_title %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param doc:</b>%>
+  <%#=h @video.param_doc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param size:</b>%>
+  <%#=h @video.param_size %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param path:</b>%>
+  <%#=h @video.param_path %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param hits:</b>%>
+  <%#=h @video.param_hits %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param mark:</b>%>
+  <%#=h @video.param_mark %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param desc:</b>%>
+  <%#=h @video.param_desc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param type:</b>%>
+  <%#=h @video.param_type %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param title:</b>%>
+  <%#=h @video.param_title %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param doc:</b>%>
+  <%#=h @video.param_doc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param size:</b>%>
+  <%#=h @video.param_size %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param path:</b>%>
+  <%#=h @video.param_path %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param hits:</b>%>
+  <%#=h @video.param_hits %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param mark:</b>%>
+  <%#=h @video.param_mark %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param desc:</b>%>
+  <%#=h @video.param_desc %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Param type:</b>%>
+  <%#=h @video.param_type %>
+<%#*</p>%>
+<%#= link_to 'Edit', edit_video_path(@video) %> 
+<%#= link_to 'Back', videos_path %>
