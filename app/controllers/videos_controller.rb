@@ -22,12 +22,13 @@ class VideosController < ApplicationController
     end
   end
 
-    def show_wiki
+  def show_wiki
     @video = Video.find(params[:id])
 
     respond_to do |format|
-      format.html # show_wiki.html.erb
+      format.html { render :layout => false }
       format.xml  { render :xml => @video }
+      
     end
   end
 
@@ -51,10 +52,11 @@ class VideosController < ApplicationController
   # POST /videos.xml
   def create
     @video = Video.new(params[:video])
+    @site_url = "http://ec2-50-19-167-232.compute-1.amazonaws.com:3000"
     respond_to do |format|
       if @video.save
         #      @video.param_thumb = @video.movieclip.url[0,@video.movieclip.url.index(".")]+"_thumb.jpg";
-        @video.param_thumb ="http://ec2-50-19-71-69.compute-1.amazonaws.com:3000/movieclips/"+@video.param_title.split(' ').join('_')+"_thumb.jpg";
+        @video.param_thumb = @site_url+ "/movieclips/"+@video.param_title.split(' ').join('_')+"_thumb.jpg";
         @local_video_thumb = "/home/ubuntu/rails/webgarbagecollector/public/movieclips/"+@video.param_title.split(' ').join('_')+"_thumb.jpg";
 
         @video.update_attributes(params[:video]);
@@ -75,10 +77,9 @@ class VideosController < ApplicationController
   # PUT /videos/1.xml
   def update
     @video = Video.find(params[:id])
-
     respond_to do |format|
       if @video.update_attributes(params[:video])
-        format.html { redirect_to(@video, :notice => 'Video was successfully updated.') }
+        format.html { redirect_to(videos_url, :notice => 'Video Wiki was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -89,7 +90,8 @@ class VideosController < ApplicationController
   # PUT /videos/1
   # PUT /videos/1.xml
   def edit_wiki
-  @video = Video.find(params[:id])
+    @video = Video.find(params[:id])
+
   end
   # DELETE /videos/1
   # DELETE /videos/1.xml
@@ -107,5 +109,7 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id => id])
   end
   
+
+
 
 end

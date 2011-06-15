@@ -9,7 +9,7 @@ class Video < ActiveRecord::Base
   # models/product.rb
   def self.search(search)
     if search
-       find(:all, :conditions => ['param_title LIKE ? or param_desc LIKE ?', "%#{search}%","%#{search}%"])
+      find(:all, :conditions => ['param_title LIKE ? or param_desc LIKE ?', "%#{search}%","%#{search}%"])
     else
       find(:all)
     end
@@ -17,14 +17,14 @@ class Video < ActiveRecord::Base
 
   has_attached_file :movieclip,
     #    :url  => "/assets/products/:id/:style/:basename.:extension",
-  :url  => "/:attachment/:id/:style/:basename.:extension",
-#  :path => "public/:attachment/:id/:style/:basename.:extension"
-      :storage        => :s3,
-      :s3_credentials => {
-      :access_key_id     =>'AKIAJDCAFXWTGN5SQINQ',
-      :secret_access_key => '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'
-    },
-      :bucket         => 'webgarbagecollector'
+    :url  => "/:attachment/:id/:style/:basename.:extension",
+    #  :path => "public/:attachment/:id/:style/:basename.:extension"
+    :storage        => :s3,
+    :s3_credentials => {
+    :access_key_id     =>'AKIAJDCAFXWTGN5SQINQ',
+    :secret_access_key => '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'
+  },
+    :bucket         => 'webgarbagecollector'
 
 
  

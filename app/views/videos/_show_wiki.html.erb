@@ -1,7 +1,7 @@
-<div id="wiki_video" style="border:5px solid green;margin: 0 auto; padding: 0 0;margin-top: 550px;">
+<div id="wiki_video" style="border:5px solid black;margin: 0 auto; padding: 0 0;margin-top: 550px;">
 <div>
 <h2>Video identity</h2>
-<%@video = Video.find(1)%>
+<%@video = Video.find(myId)%>
   <p><h3>Date of creation:</h3>
   <%=h      @video.param_wiki_date %>
 </p>
@@ -14,18 +14,19 @@
   <div style="float: right">
 <%= button_to "Agree", {}, {:method => :get, :style => "font-size:20px"} %>
   </div>
-<p><h3>Country from:</h3>
+<p><h3>Country origin</h3>
   <%=h      @video.param_wiki_country %>
 </p>
 <p><h3>Clip history:</h3>
   <%=h      @video.param_wiki_story %>
 </p>
-<p><h3>Web relative links:</h3>
+<p><h3>Relative web links:</h3>
   <%=h      @video.param_wiki_links %>
 </p>
+<%= button_to "Edit", {:action => "edit_wiki", :id => @video }, {:method => :put, :style => "font-size:30px;t"} %>
+
 </div>
 
-<%= button_to "Edit", {:action => "show_wiki", :id => @video }, {:method => :put, :style => "font-size:30px"} %>
 </div>
 
 
