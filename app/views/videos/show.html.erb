@@ -77,3 +77,56 @@
   <b>Param type:</b>
   <%=h @video.param_type %>
 </p>
+
+
+<%#= render :partial => @video.wikis  %>
+
+<%#= form_for [ @videos, Wiki.new ] do |f| %>
+
+  <%#*<div class="field">%>
+    <%#= f.label :param_desc %><br />
+    <%#= f.text_field :param_desc %>
+  <%#*</div>%>
+  <%#*<div class="actions">%>
+    <%#= f.submit %>
+  <%#*</div>%>
+<%# end %>
+
+
+<div id="wikis">
+<h2>Wikis</h2>
+<ul>
+<%= render :partial => @video.wikis %>
+</ul>
+</div>
+
+
+
+<%= form_for @wiki , :remote => true do |f| %>
+  <% if @wiki.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wiki.errors.count, "error") %> prohibited this wiki from being saved:</h2>
+
+      <ul>
+      <% @wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :video_id %>
+
+  <div class="field">
+    <%= f.label :param_desc %><br />
+    <%= f.text_field :param_desc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to "New Wiki", new_wiki_path(:video_id => @video) %> |
+  <%= link_to "View All Videos", videos_path %>
+</p>

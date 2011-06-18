@@ -76,24 +76,34 @@
 <%#*</table>%>
 <%#*</div>%>
 
-<div id="playlist" style="font-size: 15px;float:right; text-align: left;border:1px solid black;width:400px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 0px 10px;">
+<div id="playlist" style="font-size: 15px;float:right; text-align: left;border:1px solid goldenrod;width:400px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 0px 10px;">
   <ul style="list-style-type: none;">
     <%@i=0; @videos.each do |video|
-    @i=@i+1%>
+      @i=@i+1%>
   <%#*<p>%>
 
-    <li style="padding-bottom: 20px;">
-        <div id="video_<%=video.id%>_index_<%=video.param_title%>" class="<%=video.param_title%>">
+      <li style="padding-bottom: 20px;">
+        <div id="video_<%=video.id%>_begin_tag_<%=video.param_title%>_end_tag_results_thumb_number_<%=@i%>" class="<%=video.param_title%>">
           <a href="<%=video.movieclip.url%>">
 
             <div style="">
-            <%=image_tag( video.param_thumb,{:class => "video_thumb"} )%> 
+              <%=image_tag( video.param_thumb,{:class => "video_thumb"} )%>
 
               <div style="vertical-align: text-top;float: right;">
-                <h3> <%=video.param_title%>
+                <h3> <%= if video.param_title.length > 10
+                    video.param_title[0,10]+"..."
+                  else
+                    video.param_title[0,10]
+                  end
+                %>
                 </h3>
                 <div style="text-align: center">
-                  <%= video.param_desc %>
+                  <%= if video.param_desc.length > 10
+                    video.param_desc[0,10]+"..."
+                  else
+                    video.param_desc[0,10]
+                  end
+                %>
                 </div>
               </div>
             </div>

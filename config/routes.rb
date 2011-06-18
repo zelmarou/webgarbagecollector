@@ -1,8 +1,18 @@
 WebgarbagecollectorR3::Application.routes.draw do
 
-	resources :videos
+#    resources :wikis
+#  	resources :videos
+
+  resources :videos , :wikis
+   
+
 	root :to => 'videos#index'
-  match '/:controller(/:id(/:action))'
+  match 'videos/:id/get_view_count' => 'videos#get_view_count', :as => :get_view_count
+  match 'videos/:id/update_view_count' => 'videos#update_view_count', :as => :update_view_count
+  match 'videos/:id/show_wiki' => 'videos#show_wiki', :as => :show_wiki  
+  match 'wikis/:id/wiki_ok' => 'wikis#wiki_ok', :as => :wiki_ok
+  match 'wikis/:id/wiki_ko' => 'wikis#wiki_ko', :as => :wiki_ko
+  #  match '/:controller(/:id(/:action))'
   #	match '/' => redirect('http://www.google.fr')
 	
   # The priority is based upon order of creation:

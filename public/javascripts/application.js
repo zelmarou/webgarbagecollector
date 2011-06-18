@@ -1,22 +1,81 @@
+var videoId = null;
 $(function() {
+
   $("#videos_search input").keyup(function() {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
-    //alert(12);
+        $("#search").effect("highlight", {}, 1000);
     return false;
   });
 
 $('[id^=video_]').click(function() {
-var pos= this.id.indexOf('index')+6 ;
-  $('#videoTitle').html("<h3>"+this.id.substring(pos)+"<h3/>");
-  $('#wiki_video').load("/videos/"+this.id.substring(6,pos - ( 6+1 ) )+"/show_wiki");
-//$('#wiki_video').load('<%= url_for(:controller => 'Videos', :action => 'show_wiki' %>')});
-// alert();
+ var posVideo= this.id.indexOf('_begin_tag')+10 ;
+ var posBeginTag = this.id.indexOf('_begin_tag');
+ videoId = this.id.substring(6,posBeginTag );
+ var posEndTag = this.id.indexOf('_end_tag');
+  $('#videoTitle').html("<h3>"+this.id.substring(posBeginTag + 11 ,posEndTag  )+"<h3/>");
+  $('#wiki_video').load("/videos/"+videoId+"/show_wiki");
+  //Updating view counts
+ $.ajax({
+    url: "/videos/"+videoId+"/update_view_count",
+    type: 'PUT',
+   success: function(data){
+   $("#viewscount").html("<h3>VIEWS: "+data+"</h3>");
+  },
+  error: function(){
+    //alert('failure');
+  }
+  });
 });
 
+/*A decommenter initialisation du titre
 $(document).ready(function() {
-    var pos= $('[id^=video_1_index]').attr('id').indexOf('index')+6;
-  $('#videoTitle').html("<h3>"+$('[id^=video_1_index]').attr('id').substring(pos)+"<h3/>");
+
+    //var pos= $('[id$=number_1]').attr('id').indexOf('index')+6;
+    //$('#videoTitle').html("<h3>"+$('[id$=number_1]').attr('id').substring(pos)+"<h3/>");
+
+    var posVideo= $('[id$=number_1]').attr('id').indexOf('_begin_tag')+10 ;
+    var posBeginTag = $('[id$=number_1]').attr('id').indexOf('_begin_tag');
+    videoId = $('[id$=number_1]').attr('id').substring(6,posBeginTag );
+    var posEndTag = $('[id$=number_1]').attr('id').indexOf('_end_tag');
+    $('#videoTitle').html("<h3>"+ $('[id$=number_1]').attr('id').substring(posBeginTag + 11 ,posEndTag  )+"<h3/>");
+    $('#wiki_video').("/videos/"+videoId+"/show_wiki");
+    //Updating view counts
+    $.ajax({
+    url: "/videos/"+videoId+"/update_view_count",
+    type: 'PUT',
+    success: function(data){
+    $("#viewscount").html("<h3>VIEWS: "+data+"</h3>");
+    },
+    error: function(){
+        //alert('failure');
+    }
+    });
 });
+*/
 
 });
 
+
+ function get_view_count () {
+    if (videoId != null)
+     $.ajax({
+        url: "/videos/"+videoId+"/get_view_count",
+        type: 'PUT',
+       success: function(data){
+       var newVal = "<h3>VIEWS: "+data+"</h3>" ;
+
+       // alert("change");
+       if ( $("#viewscount").html().toString() !=  newVal.toString() )
+       {
+        $("#viewscount").html("<h3>VIEWS: "+data+"</h3>");
+        $("#viewscount").effect("highlight", {}, 9000);
+        }
+        },
+      error: function(){
+        //alert('failure '+ videoId);
+      }
+     });
+ };
+
+//Callback updating views
+setInterval("get_view_count("+videoId+")", 20000);

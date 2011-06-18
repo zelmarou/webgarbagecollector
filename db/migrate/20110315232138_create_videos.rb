@@ -15,7 +15,6 @@ class CreateVideos < ActiveRecord::Migration
       t.string :param_wiki_country
       t.string :param_wiki_story
       t.string :param_wiki_links
-
       t.timestamps
 
     end

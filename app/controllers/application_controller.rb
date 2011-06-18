@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-    def render(*args)
-  	args.first[:layout] = false if request.xhr? and args.first[:layout].nil?
-    super
-  end
+#    def render(*args)
+#  	args.first[:layout] = false if request.xhr? and args.first[:layout].nil?
+#    super
+#  end
 
 #  layout :layout
 #

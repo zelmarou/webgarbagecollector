@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315232230) do
+ActiveRecord::Schema.define(:version => 20110616235344) do
 
   create_table "homes", :force => true do |t|
     t.datetime "created_at"
@@ -38,6 +38,22 @@ ActiveRecord::Schema.define(:version => 20110315232230) do
     t.string   "movieclip_content_type"
     t.integer  "movieclip_file_size"
     t.datetime "movieclip_updated_at"
+    t.integer  "views_count"
+  end
+
+  create_table "wikis", :force => true do |t|
+    t.integer  "video_id"
+    t.string   "param_desc"
+    t.date     "param_wiki_date"
+    t.string   "param_wiki_author"
+    t.string   "param_wiki_country"
+    t.string   "param_wiki_story"
+    t.string   "param_wiki_links"
+    t.integer  "param_count_ok"
+    t.integer  "param_count_ko"
+    t.date     "param_wiki_edit_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

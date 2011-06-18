@@ -15,7 +15,7 @@ class VideosController < ApplicationController
   # GET /videos/1.xml
   def show
     @video = Video.find(params[:id])
-
+    @wiki = Wiki.new(:video_id => @video.id)
     respond_to do |format|
       format.html   #show.html.erb
       format.xml  { render :xml => @video }
@@ -24,11 +24,10 @@ class VideosController < ApplicationController
 
   def show_wiki
     @video = Video.find(params[:id])
-
+    @wiki = Wiki.new(:video_id => @video.id)
     respond_to do |format|
-      format.html { render :layout => false }
-      format.xml  { render :xml => @video }
-      
+      format.html { render :layout => "show_wiki" }
+      format.js
     end
   end
 
@@ -52,18 +51,25 @@ class VideosController < ApplicationController
   # POST /videos.xml
   def create
     @video = Video.new(params[:video])
-    @site_url = "http://ec2-50-19-167-232.compute-1.amazonaws.com:3000"
+    @site_url = "http://ec2-50-17-168-53.compute-1.amazonaws.com:3000"
     respond_to do |format|
       if @video.save
         #      @video.param_thumb = @video.movieclip.url[0,@video.movieclip.url.index(".")]+"_thumb.jpg";
         @video.param_thumb = @site_url+ "/movieclips/"+@video.param_title.split(' ').join('_')+"_thumb.jpg";
-        @local_video_thumb = "/home/ubuntu/rails/webgarbagecollector/public/movieclips/"+@video.param_title.split(' ').join('_')+"_thumb.jpg";
-
+        @local_video_thumb_name = @video.param_title.split(' ').join('_')+"_thumb.jpg" ;
+        @local_video_thumb = "/home/ubuntu/rails/webgarbagecollector/public/movieclips/"+@local_video_thumb_name;
+        @local_video_thumb = "/home/synaptic/NetBeansProjects/webgarbagecollector/public/movieclips/"+@local_video_thumb_name;
+        @local_video_path = @video.movieclip.url[0,@video.movieclip.url.index("?")];
+        @local_video_path = @local_video_path[@local_video_path.index("/webgarbagecollector"),@video.movieclip.url.length ];
+        @local_video_path = @local_video_path[0, @local_video_path.index("/original/")];
         @video.update_attributes(params[:video]);
         #system("ffmpeg -i public/"+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -s 100x100 -ss 10 -f image2 -vframes 1 public/"+ @video.param_thumb);
         #system("ffmpeg -i "+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -s 100x100 -ss 10 -f image2 -vframes 1 "+ @local_video_thumb);
         system("ffmpegthumbnailer -i "+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -o "+ @local_video_thumb);
-      
+        #copy the jpg thumb into the s3 bucket
+        system("s3cmd put --acl-public "+@local_video_thumb+" s3:/"+@local_video_path+"/"+@local_video_thumb_name);
+        @video.param_thumb = "http://s3.amazonaws.com"+@local_video_path+"/"+@local_video_thumb_name ;
+        @video.update_attributes(params[:video]);
         format.html { redirect_to( videos_path , :notice => 'Video was successfully created-->'+@video.param_thumb ) }
         format.xml  { render :xml => @video, :status => :created, :location => @video }
       else
@@ -87,6 +93,28 @@ class VideosController < ApplicationController
       end
     end
   end
+
+  # PUT /videos/1
+  # PUT /videos/1.xml
+  def update_view_count
+    @video = Video.find(params[:id])
+    if !@video.param_hits
+      @video.param_hits = 0
+    end
+     @video.param_hits += 1
+     @video.update_attributes(params[:video])
+
+     render :text => @video.param_hits
+  end
+
+  # PUT /videos/1
+  # PUT /videos/1.xml
+  def get_view_count
+    @video = Video.find(params[:id])
+     render :text => @video.param_hits
+  end
+
+  
   # PUT /videos/1
   # PUT /videos/1.xml
   def edit_wiki

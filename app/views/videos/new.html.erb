@@ -2,7 +2,7 @@
   <h1>Import a new video</h1>
 </div>
 <%# form_for(@video) do |f| %>
-<%= form_for(@video, :html => {:multipart => true, :class => 'styledform' }) do |f| %>
+<%= form_for(@video, :html => {:multipart => true, :class => 'styledform' }, :remote => true ) do |f| %>
 
   <%#*<p>%>
   <%#= f.label :param_title %>
@@ -96,5 +96,8 @@
     </table>
   <% end %>
 </div>
+
+<div id="loading" style="display: none">!!!!!!!!!!LOADING!!!!!!!!!!!!</div>
+
 <div id="clearnew" style="padding: 50px 0"></div>
 <%#= link_to 'Back', videos_path %>

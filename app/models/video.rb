@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
-
+  has_many :wikis
   # Paperclip Validations
-  validates_presence_of :param_title, :param_desc
+  validates  :param_title, :param_desc, :presence => true
   validates_attachment_presence :movieclip
   validates_attachment_content_type :movieclip, :content_type => ['application/x-shockwave-flash', 'application/x-shockwave-flash', 'application/flv', 'video/x-flv']
   
@@ -14,6 +14,8 @@ class Video < ActiveRecord::Base
       find(:all)
     end
   end
+
+  
 
   has_attached_file :movieclip,
     #    :url  => "/assets/products/:id/:style/:basename.:extension",
