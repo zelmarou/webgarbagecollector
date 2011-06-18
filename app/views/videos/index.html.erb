@@ -19,7 +19,7 @@
     <%@i=0; @videos.each do |video|
       @i=@i+1 %>
       <li style="float: left;margin-left: 30px;list-style: none">
-        <a id ="video_<%=video.id%>_begin_tag_<%=video.param_title%>_end_tag_flow_thumb" href="<%=video.movieclip.url%>" >
+        <a id="wcc_video_<%=video.id%>_begin_tag_<%=video.param_title%>_end_tag_flow_thumb" href="<%=video.movieclip.url%>" >
           <%=image_tag video.param_thumb , {:class => "video_thumb"} %>
         </a>
       </li>
@@ -43,62 +43,67 @@
     </tr>
   </table>
 <% end %>
-  <%#*<div id ="suggestions" style="float:left">%>
-  <%#*<h3>SUGGESTIONS</h3>%>
-  <%#*<!-- HTML Codes by Quackit.com -->%>
-  <%#*<div id="playlist"  style="border:1px solid black;width:300px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 5px 5px;">%>
-  <%# @videos.each do |video| %>
-  <%#*<p>%>
-  <%#*<a href="<%=video.movieclip.url%>
-  <%#=image_tag video.param_thumb %>
-  <%#= video.param_title %>
-  <%#*</a>%>
-  <%#*</p>%>
-  <%# end %>
-  <%#*</div>%>
-  <%#*</div>%>
+<%#*<div id ="suggestions" style="float:left">%>
+<%#*<h3>SUGGESTIONS</h3>%>
+<%#*<!-- HTML Codes by Quackit.com -->%>
+<%#*<div id="playlist"  style="border:1px solid black;width:300px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 5px 5px;">%>
+<%# @videos.each do |video| %>
+<%#*<p>%>
+<%#*<a href="<%=video.movieclip.url%>
+<%#=image_tag video.param_thumb %>
+<%#= video.param_title %>
+<%#*</a>%>
+<%#*</p>%>
+<%# end %>
+<%#*</div>%>
+<%#*</div>%>
 
 
-  <div id ="RESULTS" style="float:right; text-align: center;font-size: 30px;">
-    <h3>RESULTS</h3>
-    <div id="videos"><%= render 'videos' %>
-    </div>
+<div id ="RESULTS" style="float:right; text-align: center;font-size: 30px;">
+  <h3 style="font-size: 20px">RESULTS</h3>
+  <div id="videos"><%= render 'videos' %>
   </div>
+</div>
 
-  <div id="zplayer" style="text-align: center; margin: 0 auto; padding: 0px 0;width: 650px;height: 400px;border-width:  0px; border-style: solid;border-color: goldenrod;float: left;">
-    <div id="videoTitle" style="font-size: 30px;text-transform: uppercase;">
-      <h3>CLIP TITLE</h3>
-    </div>
-    <script type="text/Javascript">
-      $(function() {
-
-      // setup player
-      $f("player", "/flash/flowplayer-3.2.7.swf", {
-
-      //clip: {baseUrl: 'http://blip.tv/file/get'}
-
-      // playlist plugin
-      }).playlist("#playlist");
-
-      });
-    </script>
-
-
-    <div id="clearbeforeplayer" style="clear: both;padding: 20px 0;"></div>
-
-    <a id="player" class="player plain" style="border:1px solid goldenrod;width:650px;height:400px;display:block">
-      <img src="http://static.flowplayer.org/img/player/btn/play_text_large.png" alt="player"/>
-    </a>
+<div id="zplayer" style="text-align: center; margin: 0 auto; padding: 0px 0;width: 650px;height: 400px;border-width:  0px; border-style: solid;border-color: goldenrod;float: left;">
+  <div id="videoTitle" style="font-size: 30px;text-transform: uppercase;">
+    <h3 style="font-size: 20px">CLIP TITLE</h3>
   </div>
+  <script type="text/Javascript">
+    $(function() {
+
+    // setup player
+    $f("player", "/flash/flowplayer-3.2.7.swf", {
+
+    //clip: {baseUrl: 'http://blip.tv/file/get'}
+
+    // playlist plugin
+    }).playlist("#playlist");
+
+    });
+  </script>
 
 
-  <div id="clear" style="clear: both">
-  </div>
+  <div id="clearbeforeplayer" style="clear: both;padding: 20px 0;"></div>
+
+  <a id="player" class="player plain" style="border:1px solid goldenrod;width:650px;height:400px;display:block">
+    <img src="http://static.flowplayer.org/img/player/btn/play_text_large.png" alt="player"/>
+  </a>
+</div>
 
 
-          <div id="viewscount">
-    <h3>VIEWS: </h3>
-  </div>
+<div id="clear" style="clear: both">
+</div>
+
+
+<div id="viewscount">
+  <h3>Views: </h3>
+</div>
+<div id="wgclink">
+  <h3>WebGarbageCollector link:</h3>
+</div>
+<%= render :file => "videos/ad.html" %>
+
 
 <%= render :partial => 'show_wiki' , :locals => {:myId  => 1} %>
 

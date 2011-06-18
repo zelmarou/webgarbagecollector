@@ -7,13 +7,16 @@ $(function() {
     return false;
   });
 
-$('[id^=video_]').click(function() {
- var posVideo= this.id.indexOf('_begin_tag')+10 ;
- var posBeginTag = this.id.indexOf('_begin_tag');
- videoId = this.id.substring(6,posBeginTag );
- var posEndTag = this.id.indexOf('_end_tag');
-  $('#videoTitle').html("<h3>"+this.id.substring(posBeginTag + 11 ,posEndTag  )+"<h3/>");
-  $('#wiki_video').load("/videos/"+videoId+"/show_wiki");
+$('[id^=wcc_video_]').click(function() {
+    var beginFlag = "wcc_video_";
+    var beginTag  = "_begin_tag";
+    var posVideo= this.id.indexOf(beginTag)+beginTag.length + 1  ;
+    var posBeginTag = this.id.indexOf(beginTag);
+    videoId = this.id.substring(beginFlag.length,posBeginTag );
+    var posEndTag = this.id.indexOf('_end_tag');
+    $('#videoTitle').html("<h3 style='font-size: 20px'>"+this.id.substring(posBeginTag + beginTag.length + 1 ,posEndTag  )+"</h3>");
+    $('#wgclink').html("<h3>WebGarbageCollector link: <a href='http://www.webgarbagecollcetor.com/videos/"+videoId+"' style='color: goldenrod' >http://www.webgarbagecollcetor.com/videos/"+videoId+"</a></h3>");
+    $('#wiki_video').load("/videos/"+videoId+"/show_wiki");
   //Updating view counts
  $.ajax({
     url: "/videos/"+videoId+"/update_view_count",
@@ -78,4 +81,4 @@ $(document).ready(function() {
  };
 
 //Callback updating views
-setInterval("get_view_count("+videoId+")", 20000);
+setInterval("get_view_count("+videoId+")", 2000);

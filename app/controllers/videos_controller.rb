@@ -65,12 +65,13 @@ class VideosController < ApplicationController
         @video.update_attributes(params[:video]);
         #system("ffmpeg -i public/"+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -s 100x100 -ss 10 -f image2 -vframes 1 public/"+ @video.param_thumb);
         #system("ffmpeg -i "+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -s 100x100 -ss 10 -f image2 -vframes 1 "+ @local_video_thumb);
-        system("ffmpegthumbnailer -i "+@video.movieclip.url[0,@video.movieclip.url.index("?")]+" -o "+ @local_video_thumb);
+        system("ffmpegthumbnailer -i '"+@video.movieclip.url[0,@video.movieclip.url.index("?")].gsub(' ','%20')+"' -o "+ @local_video_thumb);
+        puts "ffmpegthumbnailer -i '"+@video.movieclip.url[0,@video.movieclip.url.index("?")].gsub(' ','%20')+"' -o "+ @local_video_thumb ;
         #copy the jpg thumb into the s3 bucket
         system("s3cmd put --acl-public "+@local_video_thumb+" s3:/"+@local_video_path+"/"+@local_video_thumb_name);
         @video.param_thumb = "http://s3.amazonaws.com"+@local_video_path+"/"+@local_video_thumb_name ;
         @video.update_attributes(params[:video]);
-        format.html { redirect_to( videos_path , :notice => 'Video was successfully created-->'+@video.param_thumb ) }
+        format.html { redirect_to( videos_path , :notice => 'Your video was successfully uploaded, thank you' ) }
         format.xml  { render :xml => @video, :status => :created, :location => @video }
       else
         format.html { render :action => "new" }

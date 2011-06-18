@@ -3,7 +3,17 @@ class Video < ActiveRecord::Base
   # Paperclip Validations
   validates  :param_title, :param_desc, :presence => true
   validates_attachment_presence :movieclip
-  validates_attachment_content_type :movieclip, :content_type => ['application/x-shockwave-flash', 'application/x-shockwave-flash', 'application/flv', 'video/x-flv']
+  validates_attachment_content_type :movieclip, 
+    :content_type => [
+      'application/x-shockwave-flash',
+      'application/x-shockwave-flash',
+      'application/flv',
+      'video/x-flv',
+      'video/mp4',
+      'video/MP4V-ES',
+      'video/MPV',
+      'video/mpeg4',
+      'video/mpeg4-generic',]
   
 
   # models/product.rb
