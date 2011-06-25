@@ -8,6 +8,7 @@ class CreateVideos < ActiveRecord::Migration
       t.integer :param_hits
       t.integer :param_mark
       t.string :param_desc
+      t.string :param_video_url
       t.string :param_thumb
       t.integer :param_type
       t.date :param_wiki_date
@@ -15,6 +16,7 @@ class CreateVideos < ActiveRecord::Migration
       t.string :param_wiki_country
       t.string :param_wiki_story
       t.string :param_wiki_links
+      t.string :md5
       t.timestamps
 
     end

@@ -9,11 +9,13 @@
     <%= stylesheet_link_tag 'scaffold' %>
     <%= stylesheet_link_tag 'all' %>
     <%= stylesheet_link_tag 'jquery.gritter' %>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script><%= javascript_include_tag 'rails' %>
     <%= csrf_meta_tag %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'md5' %>
     <%= javascript_include_tag 'jquery.gritter.min' %>
     <%= javascript_include_tag 'flowplayer-3.2.6.min' %>
     <%= javascript_include_tag 'flowplayer.playlist-3.0.8.min'%>
@@ -22,18 +24,12 @@
   </head>
   <body>
 
-    <div id="AppTitle" style="text-align: center;background-color: #FFDB58;
-         height: auto;
-         width: 976px;
-         margin: 0 auto 0;
-         padding: 10px 0 ;
-         border-bottom-right-radius: 6px 6px;
-         border-bottom-left-radius: 6px 6px">
+    <div id="AppTitle" class="wgc-bubble" style=" width: 976px;">
          
 
-      <h1 style="font-size: 30px;"><a href="http://localhost:3000" title="WEBGARBAGECOLLECTOR" style="text-decoration: none; ">
-          WEBGARBAGECOLLECTOR
-        </a>
+      <h1 style="font-size: 30px;">
+        <%=link_to 'WEBGARBAGECOLLECTOR', {:controller => "videos", :action => "index" }, {:title => "WEBGARBAGECOLLECTOR", :style => "text-decoration: none;"} %>
+
       </h1>
       <ul id="nav_horizontal" style=" margin: 0 auto 0;
           padding: 0 0 ;width: 350px;bottom: 0;">
@@ -48,25 +44,9 @@
     <div id="container">
       <%= yield %>
     </div>
+
     <div id="clearlayout" style="padding: 20px 0"></div>
-    <div id="ApplicationFooter" style="
-         background: #FFDB58;
-         color: white;
-         bottom: 0;
-         width: 976px;
-         margin: 0 auto 0;
-         padding: 0 0 ;
-         border-radius: 6px 6px 0 0;
-         -moz-border-radius: 6px 6px 0 0;
-         -webkit-border-radius: 6px 6px 0 0;
-         border-top-left-radius: 6px 6px;
-         border-top-right-radius: 6px 6px;
-         color: #333;
-         text-transform: capitalize;
-         margin-top:150px;
-         padding-top:50px;
-         height: 135px;
-         ">
+    <div id="ApplicationFooter" style=" width: 976px;height: 180px" class="wgc-bubble" >
       <h1 style="color: black"><%=h @video_count = Video.count;
         if @video_count > 1
           @video_count.to_s + " Videos"

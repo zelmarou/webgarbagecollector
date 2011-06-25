@@ -1,3 +1,7 @@
+/** {
+    margin: 0;
+    padding: 0;
+}*/
 
 a.player {
     display:block;
@@ -30,9 +34,9 @@ a.player img {
 }
 
 ul#nav_horizontal {  /*Ici , c'est ma configuration, à vous de la changer */
-                      width : 600px;
-                      height : 25px;
-                      list-style-type : none; /* Car sinon les puces se placent n'importe où */
+                     width : 600px;
+                     height : 25px;
+                     list-style-type : none; /* Car sinon les puces se placent n'importe où */
 }
 ul#nav_horizontal li {
     padding : 0 0.5em; /* Pour espacer les boutons entre eux */
@@ -57,18 +61,21 @@ li.bouton_droite {
 }
 
 #container {
-    margin-left: auto;
-    margin-right: auto;
+    /*    margin-left: auto;
+        margin-right: auto;
+        width: 1100px;*/
+    margin: 0 auto ;
+    padding: 0 0 ;
     width: 1100px;
     text-align: left;
 }
 body {
-/*    margin: 0 0 20px 0;*/
+    /*    margin: 0 0 20px 0;*/
     text-align: center;
     background-color: white;
-       margin:0;
-   padding:0;
-   height:100%;
+    margin:0;
+    padding:0;
+    height:100%;
 }
 
 .video_thumb
@@ -83,4 +90,56 @@ body {
     border-top-right-radius: 6px 6px;
     border-bottom-right-radius: 6px 6px;
     border-bottom-left-radius: 6px 6px;
+}
+
+.wikiFrom
+{
+    background-color: #FFDB58;
+    padding: 0 0; margin: 0 auto;
+    width: 400px;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-top-left-radius: 6px 6px;
+    border-top-right-radius: 6px 6px;
+    border-bottom-left-radius: 6px 6px;
+    border-bottom-right-radius: 6px 6px;
+}
+
+
+.wgc-bubble {
+  background-color:#FFDB58;
+  border:2px solid #666666;
+/*  font-size:35px;*/
+  line-height:1.3em;
+  margin:1px auto;
+  padding:1px;
+  position:relative;
+/*  text-align:center;*/
+  width:auto;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  -moz-box-shadow:0 0 6px #888888;
+  -webkit-box-shadow:0 0 6px #888888;
+}
+.wgc-bubble-arrow-border {
+  border-color: #666666 transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom:-22px;
+  left:30px;
+}
+.wgc-bubble-arrow {
+  border-color: #FFDB58 transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom:-19px;
+  left:30px;
 }

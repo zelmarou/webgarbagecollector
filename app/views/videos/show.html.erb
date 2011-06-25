@@ -1,132 +1,110 @@
-<p>
-  <b>Param title:</b>
-  <%=h @video.param_title %>
-</p>
+<%= javascript_include_tag "show_wiki"  %>
+<%=image_tag @video.param_thumb , { :style => "float: right; opacity: 0.09;" } %>
+<%= render :file => "videos/player.html",
+  :locals =>
+  {:video => @video  } %>
+<%= render :file => "videos/ad.html" %>
+<%=render :partial => "show_wiki" %>
 
-<p>
-  <b>Param doc:</b>
-  <%=h @video.param_doc %>
-</p>
 
-<p>
-  <b>Param size:</b>
-  <%=h @video.param_size %>
-</p>
 
-<p>
-  <b>Param path:</b>
-  <%=h @video.param_path %>
-</p>
 
-<p>
-  <b>Param hits:</b>
-  <%=h @video.param_hits %>
-</p>
 
-<p>
-  <b>Param mark:</b>
-  <%=h @video.param_mark %>
-</p>
+<%#*<p>%>
+<%#*<b>Param title:</b>%>
+<%#=h @video.param_title %>
+<%#*</p>%>
 
-<p>
-  <b>Param desc:</b>
-  <%=h @video.param_desc %>
-</p>
+<%#*<p>%>
+<%#*<b>Param doc:</b>%>
+<%#=h @video.param_doc %>
+<%#*</p>%>
 
-<p>
-  <b>Param type:</b>
-  <%=h @video.param_type %>
-</p>
+<%#*<p>%>
+<%#*<b>Param size:</b>%>
+<%#=h @video.param_size %>
+<%#*</p>%>
 
-<p>
-  <b>Param title:</b>
-  <%=h @video.param_title %>
-</p>
+<%#*<p>%>
+<%#*<b>Param path:</b>%>
+<%#=h @video.param_path %>
+<%#*</p>%>
 
-<p>
-  <b>Param doc:</b>
-  <%=h @video.param_doc %>
-</p>
+<%#*<p>%>
+<%#*<b>Param hits:</b>%>
+<%#=h @video.param_hits %>
+<%#*</p>%>
 
-<p>
-  <b>Param size:</b>
-  <%=h @video.param_size %>
-</p>
+<%#*<p>%>
+<%#*<b>Param mark:</b>%>
+<%#=h @video.param_mark %>
+<%#*</p>%>
 
-<p>
-  <b>Param path:</b>
-  <%=h @video.param_path %>
-</p>
+<%#*<p>%>
+<%#*<b>Param desc:</b>%>
+<%#=h @video.param_desc %>
+<%#*</p>%>
 
-<p>
-  <b>Param hits:</b>
-  <%=h @video.param_hits %>
-</p>
+<%#*<p>%>
+<%#*<b>Param type:</b>%>
+<%#=h @video.param_type %>
+<%#*</p>%>
 
-<p>
-  <b>Param mark:</b>
-  <%=h @video.param_mark %>
-</p>
+<%#*<p>%>
+<%#*<b>Param title:</b>%>
+<%#=h @video.param_title %>
+<%#*</p>%>
 
-<p>
-  <b>Param desc:</b>
-  <%=h @video.param_desc %>
-</p>
+<%#*<p>%>
+<%#*<b>Param doc:</b>%>
+<%#=h @video.param_doc %>
+<%#*</p>%>
 
-<p>
-  <b>Param type:</b>
-  <%=h @video.param_type %>
-</p>
+<%#*<p>%>
+<%#*<b>Param size:</b>%>
+<%#=h @video.param_size %>
+<%#*</p>%>
+
+<%#*<p>%>
+<%#*<b>Param path:</b>%>
+<%#=h @video.param_path %>
+<%#*</p>%>
+
+<%#*<p>%>
+<%#*<b>Param hits:</b>%>
+<%#=h @video.param_hits %>
+<%#*</p>%>
+
+<%#*<p>%>
+<%#*<b>Param mark:</b>%>
+<%#=h @video.param_mark %>
+<%#*</p>%>
+
+<%#*<p>%>
+<%#*<b>Param desc:</b>%>
+<%#=h @video.param_desc %>
+<%#*</p>%>
+
+<%#*<p>%>
+<%#*<b>Param type:</b>%>
+<%#=h @video.param_type %>
+<%#*</p>%>
 
 
 <%#= render :partial => @video.wikis  %>
 
 <%#= form_for [ @videos, Wiki.new ] do |f| %>
 
-  <%#*<div class="field">%>
-    <%#= f.label :param_desc %><br />
-    <%#= f.text_field :param_desc %>
-  <%#*</div>%>
-  <%#*<div class="actions">%>
-    <%#= f.submit %>
-  <%#*</div>%>
+<%#*<div class="field">%>
+<%#= f.label :param_desc %><br />
+<%#= f.text_field :param_desc %>
+<%#*</div>%>
+<%#*<div class="actions">%>
+<%#= f.submit %>
+<%#*</div>%>
 <%# end %>
 
-
-<div id="wikis">
-<h2>Wikis</h2>
-<ul>
-<%= render :partial => @video.wikis %>
-</ul>
-</div>
-
-
-
-<%= form_for @wiki , :remote => true do |f| %>
-  <% if @wiki.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@wiki.errors.count, "error") %> prohibited this wiki from being saved:</h2>
-
-      <ul>
-      <% @wiki.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%= f.hidden_field :video_id %>
-
-  <div class="field">
-    <%= f.label :param_desc %><br />
-    <%= f.text_field :param_desc %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<p>
-  <%= link_to "New Wiki", new_wiki_path(:video_id => @video) %> |
-  <%= link_to "View All Videos", videos_path %>
-</p>
+<%#*<p>%>
+<%#= link_to "New Wiki", new_wiki_path(:video_id => @video) %> 
+<%#= link_to "View All Videos", videos_path %>
+<%#*</p>%>

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616235344) do
+ActiveRecord::Schema.define(:version => 20110622215118) do
+
+  create_table "clips", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
 
   create_table "homes", :force => true do |t|
     t.datetime "created_at"
@@ -25,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20110616235344) do
     t.integer  "param_hits"
     t.integer  "param_mark"
     t.string   "param_desc"
+    t.string   "param_video_url"
     t.string   "param_thumb"
     t.integer  "param_type"
     t.date     "param_wiki_date"
@@ -32,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20110616235344) do
     t.string   "param_wiki_country"
     t.string   "param_wiki_story"
     t.string   "param_wiki_links"
+    t.string   "md5"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "movieclip_file_name"
@@ -51,7 +62,8 @@ ActiveRecord::Schema.define(:version => 20110616235344) do
     t.string   "param_wiki_links"
     t.integer  "param_count_ok"
     t.integer  "param_count_ko"
-    t.date     "param_wiki_edit_date"
+    t.string   "param_submitter"
+    t.boolean  "param_video_owner"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

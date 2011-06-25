@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   has_many :wikis
+  has_one :clip
   # Paperclip Validations
   validates  :param_title, :param_desc, :presence => true
   validates_attachment_presence :movieclip
@@ -28,19 +29,14 @@ class Video < ActiveRecord::Base
   
 
   has_attached_file :movieclip,
-    #    :url  => "/assets/products/:id/:style/:basename.:extension",
-    :url  => "/:attachment/:id/:style/:basename.:extension",
-    #  :path => "public/:attachment/:id/:style/:basename.:extension"
-    :storage        => :s3,
-    :s3_credentials => {
-    :access_key_id     =>'AKIAJDCAFXWTGN5SQINQ',
-    :secret_access_key => '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'
-  },
-    :bucket         => 'webgarbagecollector'
-
-
- 
-
-
+   :url  => "/:attachment/:md5/:style/:basename.:extension",
+   :storage => :filesystem
+    
+#    :storage        => :s3,
+#    :s3_credentials => {
+#    :access_key_id     =>'AKIAJDCAFXWTGN5SQINQ',
+#    :secret_access_key => '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'
+#  },
+#    :bucket         => 'webgarbagecollector'
 
 end

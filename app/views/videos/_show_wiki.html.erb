@@ -1,113 +1,81 @@
-<div id="wiki_video" style="border:1px solid goldenrod;margin: 0 auto; padding: 0 0;">
-<div>
-<h2>Video identity</h2>
-<%#@video = Video.find(myId)%>
-  <p><h3>Date of creation:</h3>
-  <%#=h      @video.param_wiki_date %>
-</p>
-<p><h3>Author:</h3>
-  <%#=h      @video.param_wiki_author %>
-</p>
-  <div style="float: right">
-<%#= button_to "Don't agree", { },{:method => :get, :style => "font-size:20px"} %>
-  </div>
-  <div style="float: right">
-<%#= button_to "Agree", {}, {:method => :get, :style => "font-size:20px"} %>
-  </div>
-<p><h3>Country origin</h3>
-  <%#=h      @video.param_wiki_country %>
-</p>
-<p><h3>Clip history:</h3>
-  <%#=h      @video.param_wiki_story %>
-</p>
-<p><h3>Relative web links:</h3>
-  <%#=h      @video.param_wiki_links %>
-</p>
-<%#= button_to "Edit", {:action => "edit_wiki", :id => @video }, {:method => :put, :style => "font-size:30px;t"} %>
-
-</div>
-
+<div id="wikis">
+<h2>
+  <%if @video%>
+  <%if @video.wikis.count > 1 %>
+    This video has <%=@video.wikis.count%> Wiki(s)
+  <%else%>
+    This video has no wikis. Please help us identifying this movie!
+<%end%>
+<%end%>
+</h2>
+<%#*<div id="sortwikis" style="margin: 0 auto; padding: 0 0;">%>
+  <%#*<input  id="sortwikibydate" type="button" value="All Sorted by Date"/>%>
+  <%#*<input  id="sortwikibyscore" type="button" value="All Sorted by Score"/>%>
+  <%#*</div>%>
+<div id="wikis_list">
+<ul>
+<%=
+  if @video
+    render :partial => @video.wikis.order("param_count_ok desc") , :locals => {:order  => "param_count_ok desc"}
+  end
+%>
+</ul>
 </div>
 
 
-<%#*<p>%>
-  <%#*<b>Param title:</b>%>
-  <%#=h @video.param_title %>
-<%#*</p>%>
+  <div class="wgc-bubble" style="width: 400px; text-align: center;">
 
-<%#*<p>%>
-  <%#*<b>Param doc:</b>%>
-  <%#=h @video.param_doc %>
-<%#*</p>%>
+<%= if @video
+  form_for @wiki , :remote => true do |f| %>
+  <% if @wiki.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wiki.errors.count, "error")%>
+        prohibited this wiki from being saved:</h2>
 
-<%#*<p>%>
-  <%#*<b>Param size:</b>%>
-  <%#=h @video.param_size %>
-<%#*</p>%>
+      <ul>
+      <% @wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg%>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%#*<p>%>
-  <%#*<b>Param path:</b>%>
-  <%#=h @video.param_path %>
-<%#*</p>%>
+<%= f.hidden_field :video_id %>
 
-<%#*<p>%>
-  <%#*<b>Param hits:</b>%>
-  <%#=h @video.param_hits %>
-<%#*</p>%>
+<h3>Add new wiki</h3>
 
-<%#*<p>%>
-  <%#*<b>Param mark:</b>%>
-  <%#=h @video.param_mark %>
-<%#*</p>%>
+  <p>Date of creation<br/>
+    <%= f.date_select   :param_wiki_date %>
+  </p>
+  <p>Author<br/>
+    <%=f.text_field   :param_wiki_author %>
+  </p>
+  <p>Counrty from<br/>
+    <%=f.text_field   :param_wiki_country %>
+  </p>
+  <p>Clip history<br/>
+    <%=f.text_area   :param_wiki_story %>
+  </p>
+  <p>Web relative links<br/>
+    <%=f.text_field   :param_wiki_links %>
+  </p>
 
-<%#*<p>%>
-  <%#*<b>Param desc:</b>%>
-  <%#=h @video.param_desc %>
-<%#*</p>%>
+  <div class="field">
+    <%= f.label :param_desc %><br />
+    <%= f.text_field :param_desc %>
+  </div>
 
-<%#*<p>%>
-  <%#*<b>Param type:</b>%>
-  <%#=h @video.param_type %>
-<%#*</p>%>
+  <div class="field">
+    <%= f.label :param_submitter %><br />
+    <%= f.text_field :param_submitter %>
+  </div>
 
-<%#*<p>%>
-  <%#*<b>Param title:</b>%>
-  <%#=h @video.param_title %>
-<%#*</p>%>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end
+end%>
+</div>
 
-<%#*<p>%>
-  <%#*<b>Param doc:</b>%>
-  <%#=h @video.param_doc %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param size:</b>%>
-  <%#=h @video.param_size %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param path:</b>%>
-  <%#=h @video.param_path %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param hits:</b>%>
-  <%#=h @video.param_hits %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param mark:</b>%>
-  <%#=h @video.param_mark %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param desc:</b>%>
-  <%#=h @video.param_desc %>
-<%#*</p>%>
-
-<%#*<p>%>
-  <%#*<b>Param type:</b>%>
-  <%#=h @video.param_type %>
-<%#*</p>%>
-<%#= link_to 'Edit', edit_video_path(@video) %> 
-<%#= link_to 'Back', videos_path %>
+</div>

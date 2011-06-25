@@ -6,7 +6,6 @@
   </tr>
   <tr>
     <td style="text-align: center;" >
-<%#*<h3><= OR =></h3>%>
     </td>
   </tr>
 
@@ -14,12 +13,14 @@
 
 <h1 style="text-align: center">GARBAGE FLOW</h1>
 <div id="playlist"
-     style="border:1px solid goldenrod;width:967px;height:150px;overflow-y:hidden;overflow-x:scroll;padding: 0 0; margin: 20px auto;">
+     style="width:967px;height:150px;overflow-y:hidden;overflow-x:scroll;background: none"
+
+     class="wgc-bubble">
   <ul style="width:200%;">
     <%@i=0; @videos.each do |video|
       @i=@i+1 %>
       <li style="float: left;margin-left: 30px;list-style: none">
-        <a id="wcc_video_<%=video.id%>_begin_tag_<%=video.param_title%>_end_tag_flow_thumb" href="<%=video.movieclip.url%>" >
+        <a id="wcc_video_<%=video.id%>_begin_tag_<%=video.param_title%>_end_tag_flow_thumb" href="<%=video.param_video_url%>" >
           <%=image_tag video.param_thumb , {:class => "video_thumb"} %>
         </a>
       </li>
@@ -43,20 +44,6 @@
     </tr>
   </table>
 <% end %>
-<%#*<div id ="suggestions" style="float:left">%>
-<%#*<h3>SUGGESTIONS</h3>%>
-<%#*<!-- HTML Codes by Quackit.com -->%>
-<%#*<div id="playlist"  style="border:1px solid black;width:300px;height:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;padding: 5px 5px;">%>
-<%# @videos.each do |video| %>
-<%#*<p>%>
-<%#*<a href="<%=video.movieclip.url%>
-<%#=image_tag video.param_thumb %>
-<%#= video.param_title %>
-<%#*</a>%>
-<%#*</p>%>
-<%# end %>
-<%#*</div>%>
-<%#*</div>%>
 
 
 <div id ="RESULTS" style="float:right; text-align: center;font-size: 30px;">
@@ -65,48 +52,16 @@
   </div>
 </div>
 
-<div id="zplayer" style="text-align: center; margin: 0 auto; padding: 0px 0;width: 650px;height: 400px;border-width:  0px; border-style: solid;border-color: goldenrod;float: left;">
-  <div id="videoTitle" style="font-size: 30px;text-transform: uppercase;">
-    <h3 style="font-size: 20px">CLIP TITLE</h3>
-  </div>
-  <script type="text/Javascript">
-    $(function() {
+<%=
+@initVideo = Video.new();
+@initVideo.param_title = "Welcome to WGC !";
 
-    // setup player
-    $f("player", "/flash/flowplayer-3.2.7.swf", {
+render :file => "videos/player.html" , :locals => {:video => @initVideo } %>
 
-    //clip: {baseUrl: 'http://blip.tv/file/get'}
-
-    // playlist plugin
-    }).playlist("#playlist");
-
-    });
-  </script>
-
-
-  <div id="clearbeforeplayer" style="clear: both;padding: 20px 0;"></div>
-
-  <a id="player" class="player plain" style="border:1px solid goldenrod;width:650px;height:400px;display:block">
-    <img src="http://static.flowplayer.org/img/player/btn/play_text_large.png" alt="player"/>
-  </a>
-</div>
-
-
-<div id="clear" style="clear: both">
-</div>
-
-
-<div id="viewscount">
-  <h3>Views: </h3>
-</div>
-<div id="wgclink">
-  <h3>WebGarbageCollector link:</h3>
-</div>
 <%= render :file => "videos/ad.html" %>
 
 
 <%= render :partial => 'show_wiki' , :locals => {:myId  => 1} %>
-
 <%#= link_to "Vote Yes", {:controller=>"videos", :action => 'show_wiki',:id=>5, :vote=>true}, :remote=> true, :class=> "yes-button" %>
 <%#= link_to 'show_wiki',
 'videos/1/show_wiki',

@@ -2,68 +2,19 @@
   <h1>Import a new video</h1>
 </div>
 <%# form_for(@video) do |f| %>
-<%= form_for(@video, :html => {:multipart => true, :class => 'styledform' }, :remote => true ) do |f| %>
+<%= form_for(@video, :html => {:multipart => true, :class => 'styledform' } ) do |f| %>
+  <% if @video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video.errors.count, "error") %> prohibited this wiki from being saved:</h2>
 
-  <%#*<p>%>
-  <%#= f.label :param_title %>
-  <%#= f.text_field :param_title %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_doc %>
-  <%#= f.date_select :param_doc %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_size %>
-  <%#= f.text_field :param_size %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_path %>
-  <%#= f.text_field :param_path %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_hits %>
-  <%#= f.text_field :param_hits %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_mark %>
-  <%#= f.text_field :param_mark %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_desc %>
-  <%#= f.text_field :param_desc %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_type %>
-  <%#= f.text_field :param_type %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :movieclip %>
-  <%#= f.file_field :movieclip %>
-  <%#*</p>%>
+      <ul>
+        <% @video.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-
-
-  <%#*<p>%>
-  <%#= f.label :param_doc %>
-  <%#= f.date_select :param_doc %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_size %>
-  <%#= f.text_field :param_size %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_path %>
-  <%#= f.text_field :param_path %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_hits %>
-  <%#= f.text_field :param_hits %>
-  <%#*</p>%>
-  <%#*<p>%>
-  <%#= f.label :param_mark %>
-  <%#= f.text_field :param_mark %>
-  <%#*</p>%>
-  <%= f.error_messages %>
   <div style="width: 950px;height: 250px;border: 0px double red;margin: 0 auto; padding: 0 0;">
 
     <table style="text-align: center">
@@ -72,7 +23,8 @@
         <td>  <%= f.label "Video title",{},{:style => "font-size:30px"} %><br /><br />
           <%= f.text_field :param_title,{:style => "font-size:20px"}  %></td>
         <td rowspan="2"> <%= f.label "Video description" ,{},{:style => "font-size:30px"} %><br /><br />
-          <%= f.text_area :param_desc,{:rows => 10} %></td>
+          <%= f.text_area :param_desc,{:rows => 10} %>
+        </td>
       </tr>
       <tr>
         <td>
@@ -85,19 +37,28 @@
 
       </tr>
       <tr>
-  <%#*<td>  <%= f.label "Select a type" %>
-  <%#*<br />%>
-  <%#= f.text_field :param_type %>
-  <%#*</td>%>
+  <td>  <%= f.label :md5%>
+  <br />
+  <%= f.text_field :md5 %>
+  </td>
         <td colspan="2">  <br/><br/><%= f.submit '         Upload        ',{:style => "font-size:30px"} %> </td>
 
       </tr>
 
     </table>
+
   <% end %>
 </div>
+
+
 
 <div id="loading" style="display: none">!!!!!!!!!!LOADING!!!!!!!!!!!!</div>
 
 <div id="clearnew" style="padding: 50px 0"></div>
 <%#= link_to 'Back', videos_path %>
+
+<%#*<iframe id="secondFrame" name="secondFrame" width="50%" height="500em" frameborder="1" scrolling="auto" src="/videos/uploadprogress/sqd">%>
+ <%#*sqdsqd%>
+<%#*</iframe>%>
+
+<input type='button' onclick='get_upload_progress($("#video_md5").val())' value='MD5'/>

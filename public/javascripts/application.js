@@ -7,6 +7,12 @@ $(function() {
     return false;
   });
 
+ $("#video_param_title").keyup(function() {
+      $('#video_md5').val(hex_md5($('#video_param_title').val())+new Date().getTime().toString());
+    return false;
+  });
+
+
 $('[id^=wcc_video_]').click(function() {
     var beginFlag = "wcc_video_";
     var beginTag  = "_begin_tag";
@@ -15,14 +21,14 @@ $('[id^=wcc_video_]').click(function() {
     videoId = this.id.substring(beginFlag.length,posBeginTag );
     var posEndTag = this.id.indexOf('_end_tag');
     $('#videoTitle').html("<h3 style='font-size: 20px'>"+this.id.substring(posBeginTag + beginTag.length + 1 ,posEndTag  )+"</h3>");
-    $('#wgclink').html("<h3>WebGarbageCollector link: <a href='http://www.webgarbagecollcetor.com/videos/"+videoId+"' style='color: goldenrod' >http://www.webgarbagecollcetor.com/videos/"+videoId+"</a></h3>");
-    $('#wiki_video').load("/videos/"+videoId+"/show_wiki");
+    $('#wgclink').html("<h3>WebGarbageCollector link: <a href='/videos/"+videoId+"' style='color: white' >http://www.webgarbagecollcetor.com/videos/"+videoId+"</a></h3>");
+    $('#wikis').load("/videos/"+videoId+"/show_wiki");
   //Updating view counts
  $.ajax({
     url: "/videos/"+videoId+"/update_view_count",
     type: 'PUT',
    success: function(data){
-   $("#viewscount").html("<h3>VIEWS: "+data+"</h3>");
+   $("#viewscount").html("<h3>Views: "+data+"</h3>");
   },
   error: function(){
     //alert('failure');
@@ -80,5 +86,22 @@ $(document).ready(function() {
      });
  };
 
+ function get_upload_progress (md5) {
+   // if (md5.toString().trim() != "" && md5.toString().trim() != null && md5.toString().trim() != " "  ){
+    alert("Hello");
+$.ajax({
+        url: "/videos/uploadprogress/"+md5,
+        type: 'GET',
+       success: function(data){
+       var datauploaded = data;
+        alert(datauploaded);
+        },
+      error: function(){
+        alert('failure');
+      }
+     });
+    // }
+ };
+
 //Callback updating views
-setInterval("get_view_count("+videoId+")", 2000);
+//setInterval("get_view_count("+videoId+")", 60000);

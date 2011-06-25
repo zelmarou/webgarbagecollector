@@ -1,5 +1,7 @@
 WebgarbagecollectorR3::Application.routes.draw do
 
+  resources :clips
+
 #    resources :wikis
 #  	resources :videos
 
@@ -12,6 +14,7 @@ WebgarbagecollectorR3::Application.routes.draw do
   match 'videos/:id/show_wiki' => 'videos#show_wiki', :as => :show_wiki  
   match 'wikis/:id/wiki_ok' => 'wikis#wiki_ok', :as => :wiki_ok
   match 'wikis/:id/wiki_ko' => 'wikis#wiki_ko', :as => :wiki_ko
+  match 'videos/uploadprogress/:md5' => 'videos#uploadprogress', :as => :uploadprogress
   #  match '/:controller(/:id(/:action))'
   #	match '/' => redirect('http://www.google.fr')
 	
